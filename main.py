@@ -58,5 +58,72 @@
 # Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
 # Пример:
 # k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
+#
+# import random
+# indexes = {2: '\u00B2',
+#            3: '\u00B3',
+#            4: '\u2074',
+#            5: '\u2075',
+#            6: '\u2076',
+#            7: '\u2077',
+#            8: '\u2078',
+#            9: '\u2079'}
+# k = random.randint(2, 9)
+# print(f'Для k = {k}')
+# ml = [random.randint(0, 100) for i in range(k + 1)]
+# mn = []
+# for i in range(len(ml)):
+#     if i != len(ml) - 1 and ml[i] != 0 and i != len(ml) - 2:
+#         mn.append(f'{ml[i]}x{indexes.get(len(ml) - i - 1)}')
+#     elif i == len(ml) - 2 and ml[i] != 0:
+#         mn.append(f'{ml[i]}x')
+#     elif i == len(ml) - 1 and ml[i] != 0:
+#         mn.append(f'{ml[i]}')
+# mn = ' + '.join(mn)
+# mn += ' = 0'
+# print(mn)
+# with open('file33.txt', 'w', encoding='utf-8') as data:
+#     data.write(f'Для k = {k}\n')
+#     data.write(mn)
+
 # ____________________________________________________________________________
 # 35. Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
+
+import random
+
+indexes = {2: '\u00B2',
+           3: '\u00B3',
+           4: '\u2074',
+           5: '\u2075',
+           6: '\u2076',
+           7: '\u2077',
+           8: '\u2078',
+           9: '\u2079'}
+
+
+def generate_polynomial(k):
+    ml = [random.randint(0, 9) for i in range(k + 1)]
+    print(ml)
+    mn = []
+    for i in range(len(ml)):
+        if i != len(ml) - 1 and ml[i] != 0 and i != len(ml) - 2:
+            mn.append(f'{ml[i]}x{indexes.get(len(ml) - i - 1)}')
+        elif i == len(ml) - 2 and ml[i] != 0:
+            mn.append(f'{ml[i]}x')
+        elif i == len(ml) - 1 and ml[i] != 0:
+            mn.append(f'{ml[i]}')
+    mn = ' + '.join(mn)
+    mn += ' = 0'
+    return mn
+
+pn1 = generate_polynomial(random.randint(2, 9))
+pn2 = generate_polynomial(random.randint(2, 9))
+print(pn1)
+print(pn2)
+with open('file35_pn1.txt', 'w', encoding='utf-8') as data:
+    data.write(pn1)
+with open('file35_pn2.txt', 'w', encoding='utf-8') as data:
+    data.write(pn2)
+with open('file35_res.txt', 'w', encoding='utf-8') as data:
+    data.write(f'({pn1.removesuffix(" = 0")}) + ({pn2.removesuffix(" = 0")})')
+
